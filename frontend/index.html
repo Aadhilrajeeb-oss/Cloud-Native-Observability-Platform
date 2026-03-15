@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Cloud Observability Platform</title>
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body class="bg-slate-900 text-white">
+
+<!-- Navbar -->
+
+<div class="bg-slate-800 p-4 flex justify-between">
+
+<h1 class="text-xl font-bold">Cloud Observability Platform</h1>
+
+<button onclick="logout()" class="bg-red-500 px-3 py-1 rounded">
+Logout
+</button>
+
+</div>
+
+<!-- Dashboard -->
+
+<div class="grid grid-cols-4 gap-4 p-6">
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">CPU Usage</h2>
+<p id="cpuMetric">Loading...</p>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">Memory Usage</h2>
+<p id="memoryMetric">Loading...</p>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">Containers</h2>
+<p id="containerMetric">Loading...</p>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">API Rate</h2>
+<p id="apiMetric">Loading...</p>
+</div>
+
+</div>
+
+<!-- System Cards -->
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">Prometheus</h2>
+<a href="http://localhost:9090" class="text-blue-400">Open</a>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">Grafana</h2>
+<a href="http://localhost:3000" class="text-blue-400">Open</a>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">Logs</h2>
+<a href="http://localhost:3000/explore" class="text-blue-400">View</a>
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+<h2 class="text-lg">API Service</h2>
+<a href="http://localhost:6060" class="text-blue-400">Open</a>
+</div>
+
+</div>
+
+<div class="bg-slate-800 p-4 rounded mt-6">
+
+<h2 class="text-lg mb-3">IAM Management</h2>
+
+<input id="newUser" placeholder="Username" class="text-black p-2">
+<input id="newPass" placeholder="Password" class="text-black p-2">
+
+<select id="newRole" class="text-black p-2">
+<option>viewer</option>
+<option>developer</option>
+<option>admin</option>
+</select>
+
+<button onclick="createUser()" class="bg-blue-500 px-3 py-1">
+Create User
+</button>
+
+<ul id="userList" class="mt-4"></ul>
+
+</div>
+
+<!-- Charts -->
+
+<div class="grid grid-cols-2 gap-6 px-6">
+
+<div class="bg-slate-800 p-4 rounded">
+
+<h2 class="text-lg mb-3">API Requests</h2>
+
+<canvas id="metricsChart"></canvas>
+
+</div>
+
+<div class="bg-slate-800 p-4 rounded">
+
+<h2 class="text-lg mb-3">Tasks</h2>
+
+<input id="taskInput" class="text-black p-2 w-3/4">
+
+<button onclick="addTask()" class="bg-green-500 px-3 py-1 ml-2">
+Add
+</button>
+
+<ul id="taskList" class="mt-4"></ul>
+
+</div>
+
+</div>
+
+<script src="app.js"></script>
+
+</body>
+
+</html>

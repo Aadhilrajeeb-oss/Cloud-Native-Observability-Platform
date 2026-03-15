@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+prometheus_client
+psycopg2-binary
+python-jose[cryptography]
