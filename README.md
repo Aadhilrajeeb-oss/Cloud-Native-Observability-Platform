@@ -1,98 +1,141 @@
 # Cloud Native Observability Platform with Secure IAM
 
-A **cloud-native observability platform** built using the **Prometheus ecosystem** for monitoring, logging, visualization, and alerting of containerized applications.
+A **cloud-native observability and monitoring platform** designed to demonstrate modern **DevOps, microservices, and security practices**.
 
-This platform demonstrates how modern DevOps teams implement **production-grade monitoring stacks** for microservices environments.
+The system includes:
+
+* Containerized microservices
+* Observability stack (Prometheus, Grafana, Loki)
+* Role-Based Access Control (IAM)
+* JWT authentication
+* Audit logging for security events
+* Interactive monitoring dashboard
+
+This project simulates how **enterprise DevOps platforms monitor applications and enforce access control**.
 
 ---
 
 # Architecture
 
-The platform consists of the following components:
-
-* **Prometheus** → Metrics collection
-* **Grafana** → Visualization dashboards
-* **Loki** → Centralized logging
-* **Promtail** → Log collection agent
-* **Alertmanager** → Alert routing
-* **Node Exporter** → System metrics
-* **Demo Microservice (FastAPI)** → Sample monitored application
-* **Docker** → Containerized deployment
-
-Architecture Flow:
-
 ```
-                   Grafana
-               /      |      \
-              /       |       \
-       Prometheus    Loki    Alertmanager
-            |          |
-       Node Exporter  Promtail
-            |          |
-        Demo App (FastAPI)
+Users
+  ↓
+Frontend Dashboard (Nginx)
+  ↓
+Authentication Service (JWT + IAM)
+  ↓
+Microservices
+   ├── User Service
+   └── Task Service
+  ↓
+PostgreSQL Database
+  ↓
+Observability Stack
+   ├── Prometheus (Metrics)
+   ├── Grafana (Dashboards)
+   ├── Loki (Logs)
+   └── Alertmanager (Alerts)
 ```
 
 ---
 
 # Features
 
-* Real-time infrastructure monitoring
-* Centralized log aggregation
-* Containerized observability stack
-* Custom Grafana dashboards
-* Alerting using Alertmanager
-* Role-based access control
-* Microservice metrics monitoring
+## DevOps Infrastructure
+
+* Docker containerized services
+* Microservices architecture
+* Kubernetes deployment support
+* CI/CD ready
+
+## Observability
+
+* Prometheus metrics monitoring
+* Grafana dashboards
+* Loki centralized logging
+* Real-time metrics visualization
+
+## Security
+
+* JWT authentication
+* Role-based access control (RBAC)
+* IAM user management panel
+* Audit logging for user activity
+
+## Dashboard
+
+* Live metrics charts
+* Task management demo application
+* IAM management console
+* Monitoring tool integrations
 
 ---
 
 # Tech Stack
 
-| Component        | Technology        |
-| ---------------- | ----------------- |
-| Containerization | Docker            |
-| Monitoring       | Prometheus        |
-| Visualization    | Grafana           |
-| Logging          | Loki              |
-| Log Collection   | Promtail          |
-| Alerting         | Alertmanager      |
-| Backend Service  | FastAPI           |
-| Metrics Exporter | Prometheus Client |
+| Layer            | Technology                    |
+| ---------------- | ----------------------------- |
+| Frontend         | HTML, JavaScript, TailwindCSS |
+| Backend          | FastAPI                       |
+| Authentication   | JWT (python-jose)             |
+| Database         | PostgreSQL                    |
+| Containerization | Docker                        |
+| Orchestration    | Kubernetes                    |
+| Monitoring       | Prometheus                    |
+| Visualization    | Grafana                       |
+| Logging          | Loki                          |
+| DevOps           | Docker Compose                |
 
 ---
 
 # Project Structure
 
 ```
-cloud-native-observability-platform
+cloud-observability-platform
 │
-├── app
+├── frontend
+│   ├── index.html
+│   ├── login.html
+│   ├── app.js
+│   └── Dockerfile
+│
+├── services
+│   ├── auth-service
+│   ├── user-service
+│   └── task-service
+│
 ├── prometheus
+│   └── prometheus.yml
+│
 ├── loki
+│   └── loki-config.yml
+│
 ├── promtail
+│   └── promtail-config.yml
+│
 ├── alertmanager
-├── grafana
+│
 ├── docker-compose.yml
 └── README.md
 ```
 
 ---
 
-# Deployment
+# Running the Platform
 
-Clone repository
-
-```
-git clone https://github.com/YOUR_USERNAME/cloud-native-observability-platform.git
-```
-
-Enter project
+Clone the repository
 
 ```
-cd cloud-native-observability-platform
+git clone https://github.com/Aadhilrajeeb-oss/Cloud-Native-Observability-Platform.git
 ```
 
-Start the observability stack
+Navigate into the project
+
+```
+cd cloud-observability-platform
+```
+
+Start the platform
 
 ```
 docker compose up -d --build
@@ -100,84 +143,72 @@ docker compose up -d --build
 
 ---
 
-# Access Services
+# Access the Platform
 
-Grafana
+| Service    | URL                   |
+| ---------- | --------------------- |
+| Dashboard  | http://localhost:8080 |
+| Prometheus | http://localhost:9090 |
+| Grafana    | http://localhost:3000 |
+| Task API   | http://localhost:6060 |
+| User API   | http://localhost:5000 |
+
+---
+
+# IAM Roles
+
+| Role      | Permissions    |
+| --------- | -------------- |
+| Admin     | Full access    |
+| Developer | Read access    |
+| Viewer    | Dashboard only |
+
+Example credentials:
 
 ```
-http://localhost:3000
-```
-
-Prometheus
-
-```
-http://localhost:9090
-```
-
-Demo Application
-
-```
-http://localhost:8000
-```
-
-Alertmanager
-
-```
-http://localhost:9093
+admin / admin123
+dev / dev123
+viewer / view123
 ```
 
 ---
 
-# Example Metrics
+# Audit Logging
 
-Prometheus collects metrics such as:
+Security events are recorded including:
 
-* CPU usage
-* Memory usage
-* Network traffic
-* Request rate
-* Container health
+* login attempts
+* user creation
+* role changes
+* unauthorized API requests
 
-Example metric:
+Example audit log:
 
 ```
-app_requests_total
+2026-03-15 - admin logged in successfully
+2026-03-15 - User analyst created with role viewer
+2026-03-15 - Unauthorized task creation attempt by viewer
 ```
-
----
-
-# Observability Capabilities
-
-| Capability              | Tool          |
-| ----------------------- | ------------- |
-| Metrics Monitoring      | Prometheus    |
-| Log Aggregation         | Loki          |
-| Dashboard Visualization | Grafana       |
-| Alerting                | Alertmanager  |
-| Container Monitoring    | Node Exporter |
-
----
-
-# Screenshots
-
-Add screenshots here after deployment:
-
-* Grafana dashboards
-* Prometheus metrics queries
-* Loki log explorer
 
 ---
 
 # Future Improvements
 
-* Kubernetes deployment using Helm
-* OpenTelemetry distributed tracing
-* Multi-cluster monitoring
-* OAuth authentication
-* CI/CD integration
+* Kubernetes Helm deployment
+* GitHub Actions CI/CD pipeline
+* Prometheus alert rules
+* Distributed tracing with OpenTelemetry
+* Cloud deployment (AWS/GCP)
 
 ---
 
 # Author
 
 DevOps / Cloud Engineering Portfolio Project
+
+Created to demonstrate:
+
+* DevOps architecture
+* Observability engineering
+* Secure IAM access control
+* Cloud-native application monitoring
